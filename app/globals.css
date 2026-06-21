@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* === HMPS PAI brand palette (light) ===
+     Stored as space-separated HSL components (no hsl() wrapper) so Tailwind
+     can inject opacity via hsl(var(--x) / <alpha-value>) in tailwind.config. */
+  --background: 46.7 100% 98.2%;
+  --foreground: 152 13.8% 21.4%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 152 13.8% 21.4%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 152 13.8% 21.4%;
+
+  --primary: 128.9 52.9% 90%;
+  --primary-foreground: 154.5 42.6% 18.4%;
+
+  --secondary: 147.2 43.2% 71%;
+  --secondary-foreground: 139.4 45.9% 14.5%;
+
+  --accent: 42 100% 70%;
+  --accent-foreground: 41.4 100% 14.5%;
+
+  --muted: 48 38.5% 92.4%;
+  --muted-foreground: 145.7 5.9% 46.3%;
+
+  --destructive: 13.6 81.5% 68.2%;
+  --destructive-foreground: 14 68.2% 17.3%;
+
+  --border: 45 35.3% 86.7%;
+  --input: 45 35.3% 86.7%;
+  --ring: 147.2 43.2% 71%;
+
+  --forest: 152.6 38.8% 41%;
+  --blush: 352.5 80% 90.2%;
+  --sky: 198.9 57.4% 88%;
+
+  --radius: 1.25rem;
+}
+
+.dark {
+  /* === HMPS PAI brand palette (dark — cozy forest night, not pure black) === */
+  --background: 150 22.2% 10.6%;
+  --foreground: 105 33.3% 95.3%;
+
+  --card: 148 21.1% 13.9%;
+  --card-foreground: 105 33.3% 95.3%;
+
+  --popover: 148 21.1% 13.9%;
+  --popover-foreground: 105 33.3% 95.3%;
+
+  --primary: 153.4 40.4% 29.6%;
+  --primary-foreground: 137.1 50% 94.5%;
+
+  --secondary: 158.8 30% 31.4%;
+  --secondary-foreground: 139.1 52.4% 91.8%;
+
+  --accent: 42 100% 70%;
+  --accent-foreground: 42.9 100% 8.2%;
+
+  --muted: 158.2 24.4% 17.6%;
+  --muted-foreground: 151.1 18.1% 70.8%;
+
+  --destructive: 11.4 72.4% 58.8%;
+  --destructive-foreground: 18.9 100% 96.3%;
+
+  --border: 155.5 20.4% 21.2%;
+  --input: 155.5 20.4% 21.2%;
+  --ring: 152.1 41.2% 52%;
+
+  --forest: 150 41.8% 61.6%;
+  --blush: 351.2 22.7% 29.4%;
+  --sky: 199.5 29.9% 26.3%;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+/* Custom, gentle focus ring instead of the harsh browser default */
+:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 3px;
+  border-radius: 0.5rem;
+}
+
+::selection {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+/* Slim, cozy scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--secondary));
+  border-radius: 999px;
+  border: 2px solid hsl(var(--background));
+}
+
+@layer utilities {
+  /* Hand-cut "sticker" look: dashed border + soft drop shadow, used for
+     category tags, badges and labels throughout the site. */
+  .sticker {
+    @apply inline-flex items-center gap-1.5 rounded-full border-2 border-dashed px-3.5 py-1.5 text-sm font-medium shadow-sticker;
+  }
+
+  /* Polaroid frame for the gallery's scrapbook layout */
+  .polaroid {
+    @apply rounded-[0.6rem] bg-white p-3 pb-9 shadow-lift ring-1 ring-black/5 dark:bg-card;
+  }
+
+  .washi-tape {
+    @apply absolute h-5 w-20 rotate-[-6deg] rounded-[2px] opacity-80;
+  }
+
+  .blob-bg {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Reduced-motion: tone down ambient float/spin animations site-wide */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-float,
+    .animate-float-slow,
+    .animate-wiggle,
+    .animate-spin-slow,
+    .animate-blink {
+      animation: none !important;
+    }
+  }
+}
