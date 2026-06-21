@@ -8,7 +8,6 @@ import { Menu, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { navLinks, siteConfig } from "@/data/site";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
@@ -35,7 +34,7 @@ export function Navbar() {
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-1 lg:flex">
+          <nav className="hidden items-center gap-0.5 xl:flex">
             {navLinks.map((link) => {
               const active =
                 link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
@@ -44,7 +43,7 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "rounded-full px-3.5 py-2 text-sm font-medium font-body text-foreground/70 transition-colors hover:bg-muted hover:text-foreground",
+                    "whitespace-nowrap rounded-full px-3 py-2 text-sm font-medium font-body text-foreground/70 transition-colors hover:bg-muted hover:text-foreground",
                     active && "bg-primary/70 text-forest dark:bg-secondary/25 dark:text-secondary"
                   )}
                 >
@@ -56,16 +55,13 @@ export function Navbar() {
 
           <div className="flex items-center gap-2">
             <ThemeToggle className="hidden sm:inline-flex" />
-            <Button asChild size="sm" variant="accent" className="hidden sm:inline-flex">
-              <Link href="/kontak">Gabung Yuk</Link>
-            </Button>
 
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>
                 <button
                   type="button"
                   aria-label="Buka menu navigasi"
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border-2 border-border bg-card text-foreground lg:hidden"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border-2 border-border bg-card text-foreground xl:hidden"
                 >
                   <Menu className="size-5" />
                 </button>
@@ -93,13 +89,9 @@ export function Navbar() {
                     );
                   })}
                 </nav>
-                <div className="mt-auto flex items-center justify-between gap-3 border-t border-border pt-5">
+                <div className="mt-auto flex items-center justify-between border-t border-border pt-5">
+                  <span className="font-body text-sm text-muted-foreground">Mode Tampilan</span>
                   <ThemeToggle />
-                  <Button asChild variant="accent" className="flex-1">
-                    <Link href="/kontak" onClick={() => setOpen(false)}>
-                      Gabung Yuk
-                    </Link>
-                  </Button>
                 </div>
               </SheetContent>
             </Sheet>
